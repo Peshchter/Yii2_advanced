@@ -13,6 +13,14 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
+        'view'=>[
+            'theme'=>[
+                'baseUrl'=>'@app/themes/adminlte',
+                'pathMap'=>[
+                    '@app/views'=>'@app/themes/adminlte',
+                ],
+            ],
+        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
