@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -24,12 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
-            'title',
-            'start',
-            'finish',
-            'author_id',
+            [
+                'attribute' => 'title',
+                'value' => function (\common\models\Task $task) {
+                    return Html::a(Html::encode($task->title), Url::to(['view', 'id' => $task->id]));
+                },
+                'format' => 'raw',
+            ],
+            'worker_id',
+            //'finish',
+            //'author_id',
             //'created_at',
             //'updated_at',
 

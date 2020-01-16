@@ -49,9 +49,10 @@ class Task extends ActiveRecord
     public function rules()
     {
         return [
-            [['title','author_id','start', 'finish'], 'required'],
-            [['start', 'finish', 'author_id', 'created_at', 'updated_at'], 'integer'],
+            [['title','author_id','worker_id','start', 'finish'], 'required'],
+            [['start', 'finish', 'author_id', 'worker_id', 'status','created_at', 'updated_at'], 'integer'],
             [['title'], 'string', 'max' => 255],
+            [['description'], 'safe'],
         ];
     }
 
@@ -62,9 +63,12 @@ class Task extends ActiveRecord
     {
         return [
             'title' => 'Название',
+            'description' => 'Описание',
             'start' => 'Начало',
             'finish' => 'Конец',
             'author_id' => 'Автор',
+            'worker_id' => 'Исполнитель',
+            'status' => 'Статус',
         ];
     }
 
@@ -72,5 +76,12 @@ class Task extends ActiveRecord
     {
         return $this->hasOne(User::class, ['id' => 'author_id']);
     }
+
+    public function getWorker()
+    {
+        return $this->hasOne(User::class, ['id' => 'worker_id']);
+    }
+
+
 
 }
